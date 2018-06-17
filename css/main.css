@@ -58,23 +58,16 @@ span.commit-right {
     color: #555;
 }
 
-input.line {
-    margin: .3em 0;
-    display: block;
-    width: 100%;
-}
-
 input.split {
     width: 2em;
     text-align: right;
     margin-right: 1em;
 }
 
-button.add {
-    display: block;
-    width: 4em;
-    margin: .25em auto;
-    padding: 0;
+bar-line input {
+    margin: .2em 0;
+    margin-right: .5em;
+    width: calc(100% - 2.5em);
 }
 
 spacer {

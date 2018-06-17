@@ -2,32 +2,36 @@ const main = document.getElementById("root");
 
 const render = () => {
   document.getElementById("song-name").innerHTML = song.name
-  song.commits.forEach((commit, key) => {
+
+  const headDataStore = Object.assign({}, song.head)
+  const head = renderHead(song.head)
+  main.appendChild(head)
+
+  for (let i = song.commits.length - 1; i >= 0; i--) {
     let c = make("bar-commit")
-    if (commit.head) {
-      renderHead(commit, c)
-    } else {
-      renderCommit(commit, key, song.commits.length, c)
-    }
+    renderCommit(song.commits[i], i, c)
     main.appendChild(c);
-  })
+  }
 }
 
-const renderHead = (data, node) => {
-  headHeader(data, node)
-  let btn = make("button")
-  btn.innerHTML = "+"
-  btn.className = "add"
+const renderHead = data => {
+  let commit = make("bar-commit")
+  commit.appendChild(headHeader(data))
+
   data.bars.forEach((value, key) => {
     let line = make("bar-line")
     let el = make("input")
     el.value = value
-    el.className = "line"
-    appendWithSpacer(node, el, key, data.split)
+    let btn = make('button')
+    btn.innerHTML = '+'
+    line.appendChild(el)
+    line.appendChild(btn)
+    appendWithSpacer(commit, line, key, data.split)
   })
+  return commit
 }
 
-const headHeader = (data, node) => {
+const headHeader = data => {
   let header = make("head-header")
   header.innerHTML = `
     <span>Version: HEAD</span>
@@ -38,11 +42,11 @@ const headHeader = (data, node) => {
     </span>
     <hr />
   `
-  return node.appendChild(header)
+  return header
 }
 
-const renderCommit = (data, key, length, node) => {
-  commitHeader(data, key, length, node)
+const renderCommit = (data, key, node) => {
+  commitHeader(data, key, node)
   data.bars.forEach((value, key) => {
     let el = make("div")
     el.innerHTML = value
@@ -50,7 +54,7 @@ const renderCommit = (data, key, length, node) => {
   })
 }
 
-const commitHeader = (data, key, length, node) => {
+const commitHeader = (data, key, node) => {
   let header = make("div")
   const d = new Date(data.commited)
   const year = d.getFullYear()
@@ -63,7 +67,7 @@ const commitHeader = (data, key, length, node) => {
   const time = hours + ':' + minutes.substr(-2)
   const date = month + '/' + day + '/' + year + ' ' + time
   header.innerHTML = `
-    <span>Version: ${length - key}</span>
+    <span>Version: ${key + 1}</span>
     <span class="commit-right">${date}</span>
     <hr />
   `
@@ -82,21 +86,28 @@ const make = type => document.createElement(type)
 let song = {
   name: "Notorious",
   author: "maxx",
+  head: {
+    split: 2,
+    bars: [
+      "Spit your game, talk your stuff",
+      "Grab your gun and your clique and squeeze",
+      "Pass that weed, I gotta fight",
+      "All them hoes, I got to like one",
+      "Our situation is a tight one",
+      "now what? fight or run?",
+    ],
+  },
   commits: [
     {
-      head: true,
-      split: 2,
+      commited: 1529052866575,
+      split: 1,
       bars: [
-        "Spit your game, talk your stuff",
-        "Grab your gun and your clique and squeeze",
-        "Pass that weed, I gotta fight",
-        "All them hoes, I got to like one",
-        "Our situation is a tight one",
-        "now what? fight or run?",
-      ],
+        "Spit your weed, talk your game",
+        "I got to like one hoe",
+        "Jump or kick?",
+      ]
     },
     {
-      head: false,
       split: 2,
       commited: 1529253863575,
       bars: [
@@ -106,16 +117,6 @@ let song = {
         "All them hoes, I got to like one",
         "Our situation is a tight one",
         "now what? fight or run?",
-      ]
-    },
-    {
-      head: false,
-      commited: 1529052866575,
-      split: 1,
-      bars: [
-        "Spit your weed, talk your game",
-        "I got to like one hoe",
-        "Jump or kick?",
       ]
     },
   ],
