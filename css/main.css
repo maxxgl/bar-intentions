@@ -1,5 +1,7 @@
+/* Globals ================================================================= */
 :root {
     --main-color: #7322b3;
+    --radius: 4px;
 }
 
 html {
@@ -23,18 +25,56 @@ h2, h3 {
     margin: 0;
 }
 
+input {
+    border: none;
+    padding: .3em;
+    background-color: #f4f4f4;
+    border-radius: var(--radius);
+}
+
+button {
+    border-radius: var(--radius);
+}
+
+button:focus, input:focus {
+    outline: none;
+}
+
+/* Stlyes ================================================================== */
 bar-commit {
     display: block;
     border: 2px solid black;
-    border-radius: 4px;
+    border-radius: var(--radius);
     padding: .5em;
     margin: .5em;
 }
 
-input {
+head-header {
+    display: block;
+}
+
+span.commit-right {
+    float: right;
+    color: #555;
+}
+
+input.line {
+    margin: .3em 0;
     display: block;
     width: 100%;
-    margin-bottom: .3em;
+}
+
+input.split {
+    width: 2em;
+    text-align: right;
+    margin-right: 1em;
+}
+
+button.add {
+    display: block;
+    width: 4em;
+    margin: .25em auto;
+    padding: 0;
 }
 
 spacer {
@@ -42,22 +82,15 @@ spacer {
     height: .75em;
 }
 
-/* ==========================================================================
-   Helper classes
-   ========================================================================== */
+/* Media Queries =========================================================== */
+@media only screen and (min-width: 35em) {}
 
+/* Helper classes ========================================================== */
+   
 .hidden {
     display: none !important;
 }
 
 .invisible {
     visibility: hidden;
-}
-
-/* ==========================================================================
-    Media Queries for Responsive Design.
-   ========================================================================== */
-
-@media only screen and (min-width: 35em) {
-    /* Style adjustments for viewports that meet the condition */
 }
