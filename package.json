@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "main": "index.html",
     "scripts": {
-        "serve": "browser-sync start --server --files \"css/*.css, js/*.js, *.html\"",
+        "serve": "browser-sync start --server --files \"css/*.css, js/*.js, *.html\" --no-notify",
         "start": "npm run serve"
     },
     "devDependencies": {
