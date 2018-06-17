@@ -4,7 +4,7 @@ import './App.css';
 export default class App extends Component {
   state = { ...song }
 
-  onSplitChange = e => this.setState({
+  onLineChange = e => this.setState({
     head: {
       ...this.state.head,
       [e.target.name]: e.target.value,
@@ -22,6 +22,11 @@ export default class App extends Component {
     })
   }
 
+  onCommit = () => {
+    const newCommit = { ...this.state.head, commited: + new Date() }
+    this.setState({ commits: [...this.state.commits, newCommit] })
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -31,7 +36,11 @@ export default class App extends Component {
         <main>
           <h3>{this.state.name}</h3>
           <bar-commit>
-            <HeadHeader data={this.state.head} change={this.onSplitChange} />
+            <HeadHeader
+              data={this.state.head}
+              change={this.onLineChange}
+              commit={this.onCommit}
+            />
             <hr />
             <Head data={this.state.head} change={this.onBarChange} />
           </bar-commit>
@@ -80,7 +89,7 @@ const HeadHeader = props => (
       />
       &nbsp; Lines per Bar
     </span>
-    <button>commit</button>
+    <button onClick={props.commit}>commit</button>
   </head-header>
 )
 
@@ -102,7 +111,7 @@ const Header = props => {
       </span>
       <span>{date}</span>
     </head-header>
-    )
+  )
 }
 
 var song = {
