@@ -1,28 +1,37 @@
-.App {
-  text-align: center;
+bar-commit {
+    display: block;
+    border: 2px solid black;
+    border-radius: var(--radius);
+    padding: .5em;
+    margin: .5em;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+head-header {
+    display: flex;
+    align-items: center;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+span.commit-right {
+    margin-left: auto;
+    color: #555;
 }
 
-.App-title {
-  font-size: 1.5em;
+input.split {
+    width: 3.5em;
+    text-align: right;
+    margin-right: 1em;
 }
 
-.App-intro {
-  font-size: large;
+bar-line input {
+    margin: .2em 0;
+    margin-right: .5em;
+    width: calc(100% - 2.5em);
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+spacer {
+    display: block;
+    height: .75em;
 }
+
+/* Media Queries =========================================================== */
+@media only screen and (min-width: 35em) {}
