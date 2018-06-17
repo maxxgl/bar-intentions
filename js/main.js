@@ -3,8 +3,14 @@ const main = document.getElementById("root");
 const render = () => {
   document.getElementById("song-name").innerHTML = song.name
 
-  const headDataStore = Object.assign({}, song.head)
-  const head = renderHead(song.head)
+  let headDataStore = Object.assign({}, song.head)
+  const newCommit = data => {
+    song.commits.push(data)
+    main.innerHTML = ""
+    render()
+  }
+
+  const head = renderHead(song.head, newCommit)
   main.appendChild(head)
 
   for (let i = song.commits.length - 1; i >= 0; i--) {
@@ -14,34 +20,45 @@ const render = () => {
   }
 }
 
-const renderHead = data => {
+const renderHead = (data, makeCommit) => {
   let commit = make("bar-commit")
-  commit.appendChild(headHeader(data))
+  commit.appendChild(headHeader(data, makeCommit))
 
-  data.bars.forEach((value, key) => {
+  data.bars.forEach((value, i) => {
     let line = make("bar-line")
     let el = make("input")
     el.value = value
     let btn = make('button')
     btn.innerHTML = '+'
+    // btn.onclick = () => addRow(i, data.split)
+
     line.appendChild(el)
     line.appendChild(btn)
-    appendWithSpacer(commit, line, key, data.split)
+    appendWithSpacer(commit, line, i, data.split)
   })
   return commit
 }
 
-const headHeader = data => {
+const headHeader = (data, makeCommit) => {
   let header = make("head-header")
-  header.innerHTML = `
-    <span>Version: HEAD</span>
-    <span class="commit-right">
-      <span>Split: </span>
-      <input value=${data.split} class="split"/>
-      <button>commit</button>
-    </span>
-    <hr />
-  `
+  header.innerHTML = "Version: HEAD"
+  
+  let span = make("span")
+  span.className = "commit-right"
+  span.innerHTML = "Split: "
+
+  let input = make("input")
+  input.value = data.split
+  input.className = "split"
+
+  let btn = make("button")
+  btn.innerHTML = "commit"
+  btn.onclick = () => makeCommit({...data, commited: + new Date()})
+
+  span.appendChild(input)
+  span.appendChild(btn)
+  header.appendChild(span)
+  header.appendChild(make("hr"))
   return header
 }
 
