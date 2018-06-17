@@ -1,5 +1,10 @@
+:root {
+    --main-color: #7322b3;
+}
+
 html {
     color: #222;
+    font-family: sans-serif;
     font-size: 1em;
     line-height: 1.4;
     box-sizing: border-box;
@@ -9,9 +14,33 @@ html {
     box-sizing: inherit;
 }
 
+body {
+    padding: 2%;
+}
 
+h2, h3 {
+    font-weight: normal;
+    margin: 0;
+}
 
+bar-commit {
+    display: block;
+    border: 2px solid black;
+    border-radius: 4px;
+    padding: .5em;
+    margin: .5em;
+}
 
+input {
+    display: block;
+    width: 100%;
+    margin-bottom: .3em;
+}
+
+spacer {
+    display: block;
+    height: .75em;
+}
 
 /* ==========================================================================
    Helper classes
