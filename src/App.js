@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 
-class App extends Component {
+export default class App extends Component {
   state = { ...song }
 
   onSplitChange = e => this.setState({
@@ -35,6 +35,13 @@ class App extends Component {
             <hr />
             <Head data={this.state.head} change={this.onBarChange} />
           </bar-commit>
+          {this.state.commits.slice(0).reverse().map((commit, i) =>
+            <bar-commit key={i}>
+              <Header data={commit} index={this.state.commits.length - i} />
+              <hr />
+              <Bars bars={commit.bars} split={commit.split} />
+            </bar-commit>
+          )}
         </main>
       </React.Fragment>
     );
@@ -50,6 +57,13 @@ const Head = props => props.data.bars.map((value, i) =>
     />
     <button>+</button>
     {(i + 1) % props.data.split === 0 ? <space-out /> : null}
+  </bar-line>
+)
+
+const Bars = props => props.bars.map((bar, i) =>
+  <bar-line key={i}>
+    {bar}
+    {(i + 1) % props.split === 0 ? <space-out /> : null}
   </bar-line>
 )
 
@@ -70,7 +84,23 @@ const HeadHeader = props => (
   </head-header>
 )
 
-export default App;
+
+const Header = props => {
+  const d = new Date(props.data.commited)
+  const year = d.getFullYear()
+  const month = d.getMonth()
+  const day = d.getDate()
+  const hours = d.getHours()
+  const minutes = "0" + d.getMinutes()
+  const time = hours + ':' + minutes.substr(-2)
+  const date = month + '/' + day + '/' + year + ' ' + time
+  return (
+    <head-header>
+      <span>Version: {props.index}</span>
+      <span className="commit-right">{date}</span>
+    </head-header>
+    )
+}
 
 var song = {
   name: "Notorious",
@@ -88,8 +118,8 @@ var song = {
   },
   commits: [
     {
-      commited: 1529052866575,
       split: 1,
+      commited: 1529052866575,
       bars: [
         "Spit your weed, talk your game",
         "I got to like one hoe",

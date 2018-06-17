@@ -22,13 +22,17 @@ input.split {
     margin-right: 1em;
 }
 
+bar-line {
+    display: block;
+}
+
 bar-line input {
     margin: .2em 0;
     margin-right: .5em;
     width: calc(100% - 2.5em);
 }
 
-spacer {
+space-out {
     display: block;
     height: .75em;
 }
