@@ -8,18 +8,17 @@ bar-commit {
 
 head-header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
 }
 
-span.commit-right {
-    margin-left: auto;
-    color: #555;
+head-header span:not(:first-child) {
+    color: #777;
 }
 
 input.split {
     width: 3.5em;
     text-align: right;
-    margin-right: 1em;
 }
 
 bar-line {

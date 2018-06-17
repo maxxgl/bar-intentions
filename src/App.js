@@ -70,8 +70,7 @@ const Bars = props => props.bars.map((bar, i) =>
 const HeadHeader = props => (
   <head-header>
     <span>Version: HEAD</span>
-    <span className="commit-right">
-      Split:
+    <span>
       <input
         type="number"
         value={props.data.split}
@@ -79,8 +78,9 @@ const HeadHeader = props => (
         name="split"
         onChange={props.change}
       />
-      <button>commit</button>
+      &nbsp; Lines per Bar
     </span>
+    <button>commit</button>
   </head-header>
 )
 
@@ -97,7 +97,10 @@ const Header = props => {
   return (
     <head-header>
       <span>Version: {props.index}</span>
-      <span className="commit-right">{date}</span>
+      <span>
+        {props.data.split}
+      </span>
+      <span>{date}</span>
     </head-header>
     )
 }
