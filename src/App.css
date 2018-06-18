@@ -1,9 +1,17 @@
+main {
+    display: flex;
+    overflow: auto;
+    padding: .5em 0;
+}
+
 bar-commit {
     display: block;
     border: 2px solid black;
     border-radius: var(--radius);
     padding: .5em;
     margin: .5em;
+    min-width: 24em;
+    max-width: 30em;
 }
 
 head-header {
@@ -21,8 +29,19 @@ input.split {
     text-align: right;
 }
 
+input.split-commit {
+    width: 2.5em;
+    text-align: center;
+}
+
 bar-line {
     display: block;
+}
+
+bar-line.commit {
+    display: inline-block;
+    margin: .2em 0;
+    padding: .2em;
 }
 
 bar-line input {

@@ -35,7 +35,7 @@ h2, h3 {
 
 input {
     border: none;
-    padding: .3em;
+    padding: .2em;
     background-color: #f4f4f4;
     border-radius: var(--radius);
 }

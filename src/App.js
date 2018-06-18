@@ -33,8 +33,8 @@ export default class App extends Component {
         <header>
           <h2>Bar Intentions</h2>
         </header>
+        <h3>{this.state.name}</h3>
         <main>
-          <h3>{this.state.name}</h3>
           <bar-commit>
             <HeadHeader
               data={this.state.head}
@@ -70,7 +70,7 @@ const Head = props => props.data.bars.map((value, i) =>
 )
 
 const Bars = props => props.bars.map((bar, i) =>
-  <bar-line key={i}>
+  <bar-line key={i} class="commit">
     {bar}
     {(i + 1) % props.split === 0 ? <space-out /> : null}
   </bar-line>
@@ -87,7 +87,7 @@ const HeadHeader = props => (
         name="split"
         onChange={props.change}
       />
-      &nbsp; Lines per Bar
+      &nbsp; Lines/Bar
     </span>
     <button onClick={props.commit}>commit</button>
   </head-header>
@@ -107,7 +107,7 @@ const Header = props => {
     <head-header>
       <span>Version: {props.index}</span>
       <span>
-        {props.data.split}
+        <input disabled value={props.data.split} className="split-commit" />
       </span>
       <span>{date}</span>
     </head-header>
